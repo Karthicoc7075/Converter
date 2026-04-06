@@ -70,9 +70,9 @@ const handleChange = (rowIndex, cellIndex, value) => {
       return;
     }
     let FinalData=[]
-     tableData.map((row,i) => {
+     tableData.forEach((row,i) => {
       let temp = "N,,"
-      row.map((cell, j) => {
+      row.forEach((cell, j) => {
         if(j===0 || j===1 || j===5 || j===6 || j===7 ){
           temp = temp + cell +","
         }else if(j===2 || j===3){
@@ -257,7 +257,7 @@ const handleChange = (rowIndex, cellIndex, value) => {
             
          
           {row.map((cell, cellIndex) => (
-            <td
+             <td
               key={cellIndex}
               style={{
                 padding: "6px 8px",
