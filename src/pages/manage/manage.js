@@ -1,13 +1,12 @@
 import React,{useState} from 'react'
 import "./manage.css";
-
+import { saveAs } from "file-saver";
 import fileImage from '../../assets/images/file.png'
-import closeImage from '../../assets/images/close.png'
+
 import infoIcon from '../../assets/Info icon.png'
 
 function Manage() {
       const [file, setFile] = useState(null);
-        const [fileData, setFileData] = useState();
         const [isOpenTable, setIsOpenTable] = useState(false);
         const [tableData, setTableData] = useState([]);
    const date = new Date();
@@ -15,7 +14,6 @@ function Manage() {
   const day = date.getDate();
   const monthNumber = month < 10 ? `0${month}` : month;
   const dayNumber = day < 10 ? `0${day}` : day;
-  const id = "vendor"
   const [editedCells, setEditedCells] = useState({});
 
 
@@ -36,7 +34,7 @@ const handleFileUpload = (e) => {
     
     
     console.log(rowData);
-    setFileData(rowData);
+
     setFile(file);
     setIsOpenTable(true);
     setTableData(rowData);  
@@ -59,7 +57,6 @@ const handleChange = (rowIndex, cellIndex, value) => {
 };
   const handelFileClose = () => {
     setFile(null);
-    setFileData(null);
       setEditedCells({});
       setIsOpenTable(false);
       setTableData([]);
@@ -73,17 +70,17 @@ const handleChange = (rowIndex, cellIndex, value) => {
       return;
     }
     let FinalData=[]
-    const test = tableData.map((row,i) => {
+     tableData.map((row,i) => {
       let temp = "N,,"
-      row.forEach((cell, j) => {
-        if(j==0 || j==1 || j==5 || j==6 || j==7 ){
+      row.map((cell, j) => {
+        if(j===0 || j===1 || j===5 || j===6 || j===7 ){
           temp = temp + cell +","
-        }else if(j==2 || j==3){
+        }else if(j===2 || j===3){
           temp = temp + cell +",,,,,,,,,"
-        }else if(j==4){
+        }else if(j===4){
           temp = temp + cell +",,"
         } 
-        else if(j==8){
+        else if(j===8){
           temp = temp + cell + '\n'
         }
       })
